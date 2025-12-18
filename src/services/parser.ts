@@ -31,12 +31,11 @@ export async function parseDocument(file: TFile, content: string): Promise<Docum
     }
 
     const hash = await generateHash(content);
-
-    // Sanitize path to create a valid ID (alphanumeric, hyphens, underscores)
-    const sanitizedId = path.replace(/[^a-zA-Z0-9-_]/g, "_");
+    
+    const id = await generateHash(path);
 
     return {
-        id: sanitizedId,
+        id,
         name,
         path,
         frontmatter,
